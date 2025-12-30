@@ -1048,6 +1048,16 @@ body.loading {
         max-width: 100vw;
     }
     
+    /* Masquer l'icône de scroll sur mobile */
+    .scroll-indicator {
+        display: none !important;
+    }
+    
+    /* Abaisser légèrement "Ton succès, notre priorité" */
+    .hero-label {
+        margin-top: 2rem;
+    }
+    
     .hero-title {
         font-size: 3rem;
     }

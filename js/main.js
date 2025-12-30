@@ -270,39 +270,60 @@ gsap.utils.toArray('[data-animate="fade-left"]').forEach((element) => {
 
 // Animation des cartes flottantes
 const floatingCards = document.querySelectorAll('.floating-card');
+const isMobile = window.innerWidth <= 640;
+
 floatingCards.forEach((card, index) => {
-    // Vérifier si c'est la carte "Conseils" (card-5)
-    const isConseils = card.classList.contains('card-5');
-    const initialRotation = isConseils ? -15 : 0;
-    
-    // Définir l'état initial
-    gsap.set(card, {
-        rotation: initialRotation,
-        opacity: 0,
-        scale: 0.8
-    });
-    
-    gsap.to(card,
-        {
-            opacity: 1,
-            scale: 1,
+    // Sur mobile, on laisse le CSS gérer le layout
+    if (isMobile) {
+        // Animation simple d'apparition seulement
+        gsap.set(card, {
+            opacity: 0,
+            scale: 0.8
+        });
+        
+        gsap.to(card,
+            {
+                opacity: 1,
+                scale: 1,
+                duration: 0.8,
+                delay: 0.5 + (index * 0.1),
+                ease: "power2.out"
+            }
+        );
+    } else {
+        // Version desktop avec animations complètes
+        const isConseils = card.classList.contains('card-5');
+        const initialRotation = isConseils ? -15 : 0;
+        
+        // Définir l'état initial
+        gsap.set(card, {
             rotation: initialRotation,
-            duration: 1,
-            delay: 0.8 + (index * 0.2),
-            ease: "back.out(1.7)"
-        }
-    );
-    
-    // Animation continue de flottement
-    gsap.to(card, {
-        y: "+=20",
-        rotation: isConseils ? "+=2" : "+=5", // Moins de rotation pour Conseils car déjà penché
-        duration: 3 + index,
-        repeat: -1,
-        yoyo: true,
-        ease: "sine.inOut",
-        delay: 1.8 + (index * 0.2) // Démarrer après l'animation d'apparition
-    });
+            opacity: 0,
+            scale: 0.8
+        });
+        
+        gsap.to(card,
+            {
+                opacity: 1,
+                scale: 1,
+                rotation: initialRotation,
+                duration: 1,
+                delay: 0.8 + (index * 0.2),
+                ease: "back.out(1.7)"
+            }
+        );
+        
+        // Animation continue de flottement
+        gsap.to(card, {
+            y: "+=20",
+            rotation: isConseils ? "+=2" : "+=5", // Moins de rotation pour Conseils car déjà penché
+            duration: 3 + index,
+            repeat: -1,
+            yoyo: true,
+            ease: "sine.inOut",
+            delay: 1.8 + (index * 0.2) // Démarrer après l'animation d'apparition
+        });
+    }
 });
 
 // ============================================

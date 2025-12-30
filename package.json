@@ -1,0 +1,17 @@
+{
+  "name": "passmajor",
+  "version": "1.0.0",
+  "description": "Pass Major - Site web professionnel avec animations avancées",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": ["education", "health", "students"],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
+

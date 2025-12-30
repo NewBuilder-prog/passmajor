@@ -275,19 +275,26 @@ const isMobile = window.innerWidth <= 640;
 floatingCards.forEach((card, index) => {
     // Sur mobile, on laisse le CSS gérer le layout
     if (isMobile) {
-        // Animation simple d'apparition seulement
+        // S'assurer que les styles CSS ne sont pas écrasés
+        card.style.position = 'relative';
+        card.style.top = 'auto';
+        card.style.left = 'auto';
+        card.style.right = 'auto';
+        card.style.bottom = 'auto';
+        card.style.transform = 'none';
+        
+        // Animation simple d'apparition seulement (sans modifier position/transform)
         gsap.set(card, {
-            opacity: 0,
-            scale: 0.8
+            opacity: 0
         });
         
         gsap.to(card,
             {
                 opacity: 1,
-                scale: 1,
                 duration: 0.8,
                 delay: 0.5 + (index * 0.1),
-                ease: "power2.out"
+                ease: "power2.out",
+                clearProps: "transform" // Ne pas modifier transform
             }
         );
     } else {
